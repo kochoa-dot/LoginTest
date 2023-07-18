@@ -1,0 +1,36 @@
+.centered {
+	height: 300px;
+	width: 300px;
+	margin:auto auto;
+	padding: 10% 0;
+}
+
+
+.ui-panelgrid>*>tr,	
+.ui-panelgrid .ui-panelgrid-cell {
+    border-width: 0px !important;
+    border-style: none !important;
+}
+
+
+.ui-panelgrid .ui-widget-header td {
+	padding: 10px;
+}
+
+
+.ui-layout-unit-header-title {
+	font-size: 14px;
+}
+
+.ui-layout-unit .ui-layout-unit-content {
+	overflow: visible;
+}
+
+input.ui-inputfield[disabled="disabled"] {
+    background: #93c3cd url("/CredApps/faces/javax.faces.resource/images/ui-bg_diagonals-small_50_93c3cd_40x40.png?ln=primefaces-hot-sneaks") repeat scroll 50% 50% !important;
+}
+
+input.ui-inputfield[required="true"]{
+  background: yellow !important;
+}
+

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<ui:include src="/templates/metadata.xhtml"></ui:include>
+	<c:set var="securityStatus" value="${param.securityStatus}" />
+	<c:choose>
+		<c:when test="${securityStatus == 'authError'}">
+			<c:set var="securityStatusMessage"
+				value="Usuario y contraseña incorrectos o el usuario esta deshabilitado" />
+		</c:when>
+		<c:when test="${securityStatus == 'invalidSession'}">
+			<c:set var="securityStatusMessage" value="Su sesión ha expirado" />
+		</c:when>
+		<c:when test="${securityStatus == 'logout'}">
+			<c:set var="securityStatusMessage" value="Ha cerrado sesión" />
+		</c:when>
+		<c:when test="${securityStatus=='notAuthorized'}">
+			<c:set var="securityStatusMessage"
+				value="Usuario no autorizado para esta aplicacion" />
+		</c:when>
+	</c:choose>
+</h:head>
+<h:body style="background-color:#313b3f;">
+	<h:form id="loginForm" styleClass="centered">
+		<p:growl autoUpdate="true" id="msgs" showDetail="true"
+			showSummary="true" />
+		<p:fieldset legend="CONSITI #{loginBean.envName}">
+			<p:panelGrid id="panelGrid" columns="2">
+				<f:facet name="header">Iniciar Sesión</f:facet>
+				<h:outputLabel for="j_username" value="Usuario: " />
+				<p:inputText id="j_username" required="true" title="Usuario"
+					requiredMessage="Por favor ingrese su nombre de usuario."
+					style="text-transform: none;" />
+				<h:outputLabel for="j_password" value="Contraseña:" />
+				<p:password id="j_password" required="true"
+					title="Contraseña" requiredMessage="La contraseña no puede ser vacia" />
+				<p:spacer />
+				<p:commandButton value="Ingresar" action="#{loginBean.login}"
+					update="loginForm" ajax="false" />
+				<f:facet name="footer">
+					<ui:fragment rendered="${!empty securityStatusMessage}">
+						<center>${securityStatusMessage}</center>
+					</ui:fragment>
+				</f:facet>
+			</p:panelGrid>
+		</p:fieldset>
+		<p:messages showDetail="true" showSummary="true" />
+	</h:form>
+
+</h:body>
+</html>

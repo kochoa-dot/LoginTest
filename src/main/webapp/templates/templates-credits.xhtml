@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head />
+<h:body>
+	<ui:include src="metadata.xhtml"></ui:include>
+
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<h:graphicImage library="img" value="#{resource['img/loaders.gif']}" ></h:graphicImage>
+	</p:dialog>
+	
+	<f:view contentType="text/html">
+		<p:layout style="min-width:400px;min-height:900px;">
+			
+			 <p:layoutUnit position="north" resizable="false" size="85"
+				maxSize="85" collapsible="false" style="overflow: visible;" >
+				<ui:include src="banner.xhtml"></ui:include>
+			</p:layoutUnit>
+		
+			<p:layoutUnit position="west" resizable="true" size="207"
+				maxSize="207" collapsible="true" style="overflow: visible;">
+				<ui:include src="left-menu.xhtml"></ui:include>
+			</p:layoutUnit>
+			<p:layoutUnit position="center" style="overflow: visible;">
+				<p:growl autoUpdate="true" id="msgs" showDetail="false"
+					showSummary="true" />
+				<ui:insert name="content" />
+			</p:layoutUnit>
+		</p:layout>
+	</f:view>
+</h:body>
+</html>
